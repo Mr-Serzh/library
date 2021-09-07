@@ -1,11 +1,7 @@
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
-  padding: 20px 15px;
-  height: 100vh;
-
-  background-color: #e7ecf2;
+  max-width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }

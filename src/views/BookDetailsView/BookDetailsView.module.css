@@ -1,0 +1,32 @@
+.img {
+  width: 350px;
+  border-radius: 10px;
+  overflow: hidden;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.bookDescr {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* .bookDescr:last-of-type {
+  margin-bottom: 25px;
+} */
+
+.bookLink {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.15s linear;
+}
+
+.bookLink:hover,
+.bookLink:focus {
+  text-decoration: underline;
+  color: var(--accent-color);
+}
+
+.book {
+  margin-top: 30px;
+}

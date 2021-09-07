@@ -1,0 +1,50 @@
+.booksList {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  margin: -15px;
+  padding: 20px 40px;
+}
+
+.booksItem {
+  position: relative;
+  width: 330px;
+  margin: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+  object-fit: cover;
+  border: solid 1px #8b8a8a;
+  background-color: #ebebf1;
+  transition: all 0.25s linear;
+}
+
+.booksItem:hover,
+.booksItem:focus {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.description {
+  padding: 20px;
+}
+
+.bookTitle {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.bookAuthor {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.bookLink {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.15s linear;
+}
+
+.bookLink:hover,
+.bookLink:focus {
+  text-decoration: underline;
+  color: var(--accent-color);
+}
