@@ -1,76 +1,87 @@
-import { useState, useEffect } from 'react';
-import {
-  Link,
-  useRouteMatch,
-  useParams,
-  useHistory,
-  useLocation,
-} from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+
 import Button from '@material-ui/core/Button';
-import * as booksAPI from '../../services/books-api';
+import { getAuthorBooks } from '../../services/books';
 import LoaderComponent from '../../components/LoaderComponent';
+
 import s from './BookDetailsView.module.css';
 
-export default function BookDetailsView() {
-  const { url } = useRouteMatch();
-  const { bookId } = useParams();
-  const [book, setBook] = useState(null);
+export default function BookDetailsView(props) {
   const [isLoding, setIsLoding] = useState(false);
   const history = useHistory();
-  const location = useLocation();
+  const location = useLocation(props);
 
-  useEffect(() => {
-    setIsLoding(true);
-    // fetch('https://azsoft-code-server.herokuapp.com/books')
-    //   .then(resp => resp.json())
-    //   .then(result => setBook(result.books))
-    booksAPI
-      .getBooks()
-      .then(result => setBook(result.books))
-      .catch(error => console.log(error.massage))
-      .finally(() => setIsLoding(false));
-  }, []);
+  const {
+    location: { state },
+  } = props;
+
+  const { book, sameAuthorBooks } = state || {};
 
   const handleGoBack = () => {
     history.push(location?.state?.from ?? '/');
   };
 
-  const detailBbook = book?.find(item => item.id === bookId);
-  // console.log(detailBbook);
-
   return (
     <>
-      {isLoding ? (
-        <LoaderComponent />
+      {!book ? (
+        <h1 className={s.noBook}>Book is not found</h1>
       ) : (
         <>
-          {book && (
+          {isLoding ? (
+            <LoaderComponent />
+          ) : (
             <>
-              <Button
-                variant="contained"
-                color="secondary"
-                type="button"
-                onClick={handleGoBack}
-                className={s.btn}
-              >
-                &#9754; Back to list
-              </Button>
-              <div className={s.book}>
-                <img
-                  className={s.img}
-                  src={detailBbook?.cover}
-                  alt={detailBbook?.title}
-                />
-                <h2>{detailBbook?.title}</h2>
-                <h3 className={s.bookDescr}>{detailBbook?.author}</h3>
-                <p className={s.bookDescr}>{detailBbook?.isbn}</p>
-                <p className={s.bookDescr}>
-                  A list of book titles by the same Author (with links)
-                </p>
-                <Link className={s.bookLink} to={`/`}>
-                  Back to list
-                </Link>
-              </div>
+              {book && (
+                <>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    type="button"
+                    onClick={handleGoBack}
+                    className={s.btn}
+                  >
+                    &#9754; Back to list
+                  </Button>
+                  <div className={s.book}>
+                    <img className={s.img} src={book.cover} alt={book.title} />
+                    <h2>{book.title}</h2>
+                    <h3 className={s.bookDescr}>Author: {book.author}</h3>
+                    <p className={s.bookDescr}>ISBN: {book.isbn}</p>
+                    <p className={s.bookDescr}>Author's books:</p>
+
+                    {Boolean(sameAuthorBooks?.length) && (
+                      <ul className={s.bookList}>
+                        {sameAuthorBooks.map(item => (
+                          <li key={item.id} className={s.bookListItem}>
+                            <Link
+                              className={s.bookLink}
+                              to={{
+                                pathname: `/${item.id}`,
+                                state: {
+                                  book: item,
+                                  sameAuthorBooks: getAuthorBooks(
+                                    [...sameAuthorBooks, book].filter(
+                                      entry => entry.id !== item.id,
+                                    ),
+                                    item.author,
+                                  ),
+                                },
+                              }}
+                            >
+                              {item.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    <Link className={s.bookLink} to={`/`}>
+                      &#9754; Back to list
+                    </Link>
+                  </div>
+                </>
+              )}
             </>
           )}
         </>

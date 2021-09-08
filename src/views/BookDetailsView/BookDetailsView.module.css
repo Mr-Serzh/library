@@ -1,3 +1,9 @@
+.noBook {
+  text-align: center;
+  margin-top: 150px;
+  color: var(--accent-color);
+}
+
 .img {
   width: 350px;
   border-radius: 10px;
@@ -10,10 +16,6 @@
   margin-top: 0;
   margin-bottom: 10px;
 }
-
-/* .bookDescr:last-of-type {
-  margin-bottom: 25px;
-} */
 
 .bookLink {
   text-decoration: none;
@@ -29,4 +31,9 @@
 
 .book {
   margin-top: 30px;
+}
+
+.bookListItem {
+  padding-left: 10px;
+  margin-bottom: 10px;
 }

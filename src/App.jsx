@@ -25,13 +25,12 @@ export default function App() {
 
       <Suspense fallback={<LoaderComponent />}>
         <Switch>
-          <Route path="/" exact>
-            <BooksView />
-          </Route>
-
-          <Route path="/:bookId">
-            <BookDetailsView />
-          </Route>
+          <Route path="/" exact component={props => <BooksView {...props} />} />
+          <Route
+            path="/:bookId"
+            exact
+            component={props => <BookDetailsView {...props} />}
+          />
 
           <Route>
             <NotFoundView />
