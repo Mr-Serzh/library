@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
-import { getAuthorBooks } from '../../services/books';
+import { getAuthorBooks } from '../../services/bookAuthorValidator';
 import LoaderComponent from '../../components/LoaderComponent';
 
 import s from './BookDetailsView.module.css';
@@ -35,6 +35,7 @@ export default function BookDetailsView(props) {
               {book && (
                 <>
                   <Button
+                    data-testid="goBack"
                     variant="contained"
                     color="secondary"
                     type="button"

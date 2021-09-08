@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 // import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import * as booksAPI from '../../services/books-api';
 import LoaderComponent from '../../components/LoaderComponent';
-import { getAuthorBooks } from '../../services/books';
+import { getAuthorBooks } from '../../services/bookAuthorValidator';
 import s from './BooksView.module.css';
 
 export default function BooksView(props) {
