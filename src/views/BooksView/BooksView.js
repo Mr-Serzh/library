@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useHistory, useRouteMatch } from 'react-router-dom';
+// import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import * as booksAPI from '../../services/books-api';
 import LoaderComponent from '../../components/LoaderComponent';
 import { getAuthorBooks } from '../../services/books';
@@ -50,15 +50,15 @@ export default function BooksView(props) {
                       <div className={s.description}>
                         <h2 className={s.bookTitle}>{book.title}</h2>
                         <h3 className={s.bookAuthor}>{book.author}</h3>
-                        <Link
+                        <p
                           className={s.bookLink}
-                          to={`/${book.id}`}
+                          // to={`/${book.id}`}
                           onClick={() => {
                             handleMoreClick(book);
                           }}
                         >
                           More information
-                        </Link>
+                        </p>
                       </div>
                     </>
                   }
